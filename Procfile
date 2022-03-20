@@ -1,1 +1,1 @@
-web: gunicorn Wordle.wsgi --log-file -
+web: gunicorn games.wsgi --log-file -
