@@ -1,0 +1,35 @@
+<form method="POST">
+    {%csrf_token%}
+    {{form}}
+    <button hidden x-ref="submit_button" hx-post="{{request.path}}" hx-trigger="click" hx-target="#swap_div"
+    hx-swap="innerHTML">Submit</button>
+</form>
+<div class="row border-bottom">
+    <div class="col-1"></div>
+    <div class="col-10 h1 text-center">Click on the box</div>
+    <div class="col-1 d-flex align-items-center"><button type="button" class="btn-close"></button></div>
+</div>
+        <div class="row my-2 py-2">
+    <div class="col-6 d-flex align-items-center justify-content-center">
+        <span class=" h2 align-middle text-center text-secondary">Count: </span>
+        <span class="h2 text-secondary" x-text="count_xmodel"></span>
+    </div>
+    <div class="col-6 d-flex align-items-center justify-content-center">
+        <span class=" h2 align-middle text-center text-secondary">Best: </span>
+        <span class="h2 text-secondary" x-text={{best}}></span>
+    </div>
+</div>
+<div class="container h-100">
+    {%for i in row_range%}
+    <div class="row h-25">
+
+    {%for j in col_range%}
+    {%if i == row and j == col%}
+        <div class="col m-1 border d-flex align-items-center justify-content-center bg-warning" x-ref="active_div" x-on:click="count_xmodel=count_xmodel+1;$refs.active_div.classList.remove('bg-warning');setTimeout(() => {  $refs.submit_button.click() }, 10);"></div>
+    {%else%}
+        <div class="col m-1 border d-flex align-items-center justify-content-center"></div>
+    {%endif%}
+    {%endfor%}
+    </div>
+    {%endfor%}
+</div>
