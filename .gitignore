@@ -1,4 +1,5 @@
 *.pyc
+games/__pycache__/
 __pycache__/
 lib/
 lib64/
