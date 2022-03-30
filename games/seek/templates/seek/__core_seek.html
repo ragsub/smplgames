@@ -1,39 +1,42 @@
+{% load static %}
+
 <form method="POST">
     {%csrf_token%}
     {{form}}
     <button hidden x-ref="submit_button" hx-post="{{request.path}}" hx-trigger="click" hx-target="#swap_div"
     hx-swap="innerHTML">Submit</button>
 </form>
+<audio id="audio" x-ref="x_success" src={%static "seek/391540__mativve__electro-success-sound.wav"%}></audio>
 <div class="row border-bottom bg-dark py-2">
     <div class="col-1"></div>
     <div class="col-10 h1 text-center text-light">Click on the box</div>
     <div class="col-1 d-flex align-items-center"><button type="button" class="btn-close btn-close-white"></button></div>
 </div>
-<div class="row py-2 bg-secondary">
+<div class="row py-2 bg-secondary align-items-center justify-content-center">
     <div class="col-6 d-flex align-items-center justify-content-center">
-        <span class="h4 align-middle text-center text-white">Count: </span>
+        <span class="h4 align-middle text-center text-white">Count : </span>
         <span class="h4 text-white fw-bold" x-text="count_xmodel"></span>
     </div>
     <div class="col-6 d-flex align-items-center justify-content-center">
-        <span class=" h4 align-middle text-center text-white">Best: </span>
+        <span class=" h4 align-middle text-center text-white">Best : </span>
         <span class="h4 text-white fw-bold" x-text={{best}}></span>
     </div>
 </div>
 <div class="row h-100 bg-dark">
     <div class="col">
-<div class="container h-100 p-1">
-    {%for i in row_range%}
-    <div class="row h-25">
+        <div class="container h-100 p-1">
+            {%for i in row_range%}
+            <div class="row h-25">
 
-    {%for j in col_range%}
-    {%if i == row and j == col%}
-        <div class="col m-1 border d-flex align-items-center justify-content-center bg-warning" x-ref="active_div" x-on:click="count_xmodel=count_xmodel+1;$refs.active_div.classList.remove('bg-warning');setTimeout(() => {  $refs.submit_button.click() }, 10);"></div>
-    {%else%}
-        <div class="col m-1 border d-flex align-items-center justify-content-center"></div>
-    {%endif%}
-    {%endfor%}
+                {%for j in col_range%}
+                {%if i == row and j == col%}
+                    <div class="col m-1 border d-flex align-items-center justify-content-center bg-warning" x-ref="active_div" x-on:click="$refs.x_success.play();count_xmodel=count_xmodel+1;$refs.active_div.classList.remove('bg-warning');setTimeout(() => {  $refs.submit_button.click() }, 10);"></div>
+                {%else%}
+                    <div class="col m-1 border d-flex align-items-center justify-content-center"></div>
+                {%endif%}
+                {%endfor%}
+            </div>
+        {%endfor%}
+        </div>
     </div>
-    {%endfor%}
-</div>
-</div>
 </div>
