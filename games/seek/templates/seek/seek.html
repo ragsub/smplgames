@@ -7,7 +7,7 @@
     {%include "games/__scripts.html"%}
     <title>Click the box</title>
 </head>
-<body style="position:fixed;height:100%;width:100%" x-data="{ count_xmodel: {{form.count.value}} }">
+<body style="position:fixed;height:100%;width:100%;touch-action: none;" x-data="{ count_xmodel: {{form.count.value}} }">
     <div class="container h-100 d-flex flex-column justify-content-between" id="swap_div">
         {%include "seek/__core_seek.html"%}
     </div>
